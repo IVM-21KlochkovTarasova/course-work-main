@@ -1,0 +1,73 @@
+<div style="background:  #2ba7d2">
+  <ul class="breadcrumb">
+    <li [ngClass]="{'active': choice == 'section', 'disable':choice != 'section'}" (click)="loadSection()">
+      <a style="color: white;" class="title-razdel">Раздел</a>
+    </li>
+    <div class="divider"  *ngIf="choice == 'program' || choice == 'courses' || choice == 'currentProgram' "
+         style="text-align: center;">
+    <mat-icon class="centered">keyboard_arrow_right</mat-icon></div>
+    <li [ngClass]="{'active': choice == 'courses', 'disable':choice != 'courses'}"
+        *ngIf="choice == 'program' || choice == 'courses' || choice == 'currentProgram' "
+        (click)="loadCourses(this.currentSec)">
+      <a  style="color: white;" class="title-razdel">{{this.currentSec.name}}</a>
+    </li>
+    <span class="divider" *ngIf="choice == 'program' || choice == 'currentProgram' " style="text-align: center;">
+    <mat-icon class="centered">keyboard_arrow_right</mat-icon>
+
+  </span>
+    <li [ngClass]="{'active': choice == 'program', 'disable':choice != 'program'}"
+        *ngIf="choice == 'program'|| choice == 'currentProgram'" (click)="clickProgram()"  style="color: white;"
+        class="title-razdel">
+      {{this.currentCourse.name}}</li>
+    <mat-icon class="centered" *ngIf="choice == 'currentProgram' ">keyboard_arrow_right</mat-icon>
+    <li [ngClass]="{'active': choice == 'currentProgram', 'disable':choice != 'currentProgram'}"
+        *ngIf="choice == 'currentProgram' "  style="color: white;" class="title-razdel">
+      {{nameProgram}}</li>
+  </ul>
+</div>
+
+<!--Разделы-->
+<div class="flex" *ngIf="choice == 'section'">
+  <div class="item"  *ngFor="let item of program " (click)="loadCourses(item)">
+    <div class="title">{{item.name}}</div>
+    <div class="about">
+      <div>{{item.description}} </div>
+    </div>
+  </div>
+</div>
+
+<!--Направления-->
+<div class="flex" *ngIf="choice == 'courses'">
+  <div class="item"   *ngFor="let item of program " (click)="loadProgram(item)">
+    <div class="title">{{item.name}}</div>
+    <div class="about">
+      <div>{{item.description}} </div>
+    </div>
+  </div>
+</div>
+
+<!--Программа обучения-->
+<div class="flex-program" *ngIf="choice == 'program'">
+  <div class="item-program"   *ngFor="let item of program">
+    <div class="title">{{item.name}}</div>
+    <div class="about">
+      <div>{{item.description}} </div>
+    </div>
+    <div class="about">
+      <div>Стоимость {{item.price}} рублей</div>
+    </div>
+    <div class="about">
+      <button *ngIf="item.contractId === null || item.contractId === undefined" mat-raised-button style="background:  #c9c9f7; color: white; margin:0 10px" (click)="buy(item)">
+        Купить
+      </button>
+
+      <button *ngIf="item.contractId !== null && item.contractId !== undefined" mat-raised-button
+              style="background:  #c9c9f7; color: white; margin:0 10px" disabled="true">
+        Куплено  <mat-icon>check_circle_outline</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+
+

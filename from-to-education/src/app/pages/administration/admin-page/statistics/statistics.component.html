@@ -1,0 +1,33 @@
+<form style="text-align: center;" [formGroup]="form">
+  <div >
+    <div class="container">
+      <mat-form-field class="example-full-width">
+        <mat-label>Логин</mat-label>
+        <input matInput formControlName="username">
+      </mat-form-field>
+
+      <button mat-raised-button class=" mr-2 mt-2 btn-green" (click)="search()">
+        Поиск
+      </button>
+    </div>
+
+  </div>
+<div style="width: 90%; margin: auto; height: 600px; align-items: center">
+  <ag-grid-angular
+    style="width: 810px; height: 600px; margin-left: auto;
+    margin-right: auto;"
+    class="ag-theme-alpine"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [rowClassRules]="rowClassRules">
+  </ag-grid-angular>
+</div>
+<div class="journal-info-container  mt-2 ">
+  <button mat-raised-button class="btn-green" [disabled]="page <= 1" (click)="previousPage()" >
+    <mat-icon>keyboard_arrow_left</mat-icon></button>
+  <span class="ms-2 me-2">Страница {{page}} из {{pageCount}}</span>
+  <button mat-raised-button class="btn-green" [disabled]="page>= pageCount" (click)="nextPage()" >
+    <mat-icon>keyboard_arrow_right</mat-icon>
+  </button>
+</div>
+</form>

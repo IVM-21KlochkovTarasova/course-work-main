@@ -1,0 +1,20 @@
+2022-11-15 23:30:10,239 vkorneychuk-home prof-dev.jar[22419] WARN  [io.qua.oid.com.run.OidcCommonUtils] (vert.x-eventloop-thread-1) OIDC Server is not available:: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: localhost/127.0.0.1:8082
+Caused by: java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.Net.pollConnect(Native Method)
+	at java.base/sun.nio.ch.Net.pollConnectNow(Net.java:672)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:946)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:337)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:334)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:776)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:724)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:650)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:997)
+	at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+2022-11-15 23:30:11,516 vkorneychuk-home prof-dev.jar[22419] INFO  [io.quarkus] (Quarkus Main Thread) prof 1.0.0-SNAPSHOT on JVM (powered by Quarkus 2.14.0.Final) started in 5.415s. Listening on: http://localhost:8080
+2022-11-15 23:30:11,517 vkorneychuk-home prof-dev.jar[22419] INFO  [io.quarkus] (Quarkus Main Thread) Profile dev activated. Live Coding activated.
+2022-11-15 23:30:11,519 vkorneychuk-home prof-dev.jar[22419] INFO  [io.quarkus] (Quarkus Main Thread) Installed features: [agroal, cdi, hibernate-orm, hibernate-orm-panache, jdbc-postgresql, narayana-jta, oidc, resteasy, resteasy-jackson, security, smallrye-context-propagation, vertx]
+2022-11-15 23:30:19,459 vkorneychuk-home prof-dev.jar[22419] INFO  [io.quarkus] (Quarkus Main Thread) prof stopped in 0.020s

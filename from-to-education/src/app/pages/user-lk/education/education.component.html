@@ -1,0 +1,54 @@
+
+<mat-tab-group >
+  <mat-tab label="Активные программы обучения" *ngIf="stat == 'false'">
+    <div class="mt-3"></div>
+    <mat-accordion >
+      <div  *ngFor="let prog of eduPrograms">
+        <mat-expansion-panel  class="panel" *ngIf="!prog.contract.isComplete"
+                              (opened)="prog.panelOpenState = true"
+                              (closed)="prog.panelOpenState = false">
+          <mat-expansion-panel-header >
+            <mat-panel-title>
+              {{prog.studyProgram.name}}
+            </mat-panel-title>
+            <mat-panel-description *ngIf="!prog.panelOpenState">
+              Подробнее
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class = 'flex' >
+            <ng-container *ngFor="let but of buttons" >
+              <button mat-raised-button (click)="but.action(prog.studyProgram.studyProgramId)" class="button" >
+                {{but.name}}</button>
+            </ng-container>
+          </div>
+        </mat-expansion-panel>
+      </div>
+
+    </mat-accordion>
+
+  </mat-tab>
+  <mat-tab label="Завершенные программы обучения" *ngIf="stat == 'false'">
+    <div class="mt-3"></div>
+    <mat-accordion class="mt-2">
+      <div *ngFor="let prog of eduPrograms">
+        <mat-expansion-panel  class="panel"  *ngIf="prog.contract.isComplete"
+                              (opened)="prog.panelOpenState = true"
+                              (closed)="prog.panelOpenState = false">
+          <mat-expansion-panel-header >
+            <mat-panel-title>
+              {{prog.studyProgram.name}}
+            </mat-panel-title>
+            <mat-panel-description *ngIf="!prog.panelOpenState">
+              Подробнее
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class = 'flex'>
+            <button mat-raised-button (click)="getResult(prog.studyProgram.studyProgramId)" class="button" >
+              Смотреть результат</button>
+          </div>
+        </mat-expansion-panel>
+      </div>
+
+    </mat-accordion>
+  </mat-tab>
+</mat-tab-group>

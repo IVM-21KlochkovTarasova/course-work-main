@@ -1,0 +1,35 @@
+version: '3'
+services:
+
+  keycloak-pg:
+    image: postgres:13
+    ports:
+      - "5431:5432"
+    volumes:
+      - keycloak-db:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d/
+    environment:
+      - 'POSTGRES_PASSWORD=keycloak'
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:14.0.0
+    volumes:
+      - "./standalone-ha.xml:/opt/jboss/keycloak/standalone/configuration/standalone-ha.xml"
+    environment:
+      PROXY_ADDRESS_FORWARDING: "true"
+      VIRTUAL_HOST: keycloak
+      DB_VENDOR: POSTGRES
+      DB_ADDR: keycloak-pg
+      DB_DATABASE: keycloak
+      DB_SCHEMA: public
+      DB_USER: postgres
+      DB_PASSWORD: keycloak
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: admin
+    ports:
+      - "8082:8080"
+    depends_on:
+      - keycloak-pg
+          
+volumes:
+  keycloak-db:

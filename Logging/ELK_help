@@ -1,0 +1,24 @@
+ELK
+1. Запустить docker-compose с ELK
+1.1 Зайти в папку quarkus-elk
+1.2 docker-compose up
+Дополнительно
+д.1 конфиг logstash расположен в quarkus-elk/pipelines/gelf.conf
+
+2. Запустить приложение
+2.1 зайти в gelf-logging
+2.2 docker-compose up
+Дополнительно
+д.1 приложение делает лог по адресу /log
+д.2 конфиг для отправки в application.properties 
+д.2.1 quarkus.log.syslog.endpoint=logstash:12202 - адрес logstash, куда слать логи
+д.2.2 quarkus.log.syslog.enable=true - видимо ключает режим, чтобы отправлять логи типа syslog
+д.2.3 quarkus.log.syslog.protocol=udp - использовать протокол udp для отправки лога 
+д.3 если требуется пересобрать приложение, то сначала редактируем код, после собираем проект (сначала dev потом build), далее выполняем: docker build -t app4elk .
+
+3. Зайти в интерфейс kibana (http://localhost:5601)
+    3.1 если elastic вырубается с ошибкой, нужно выполнить следующую машину на хост-машине:
+        sysctl -w vm.max_map_count=262144
+    3.2 То что лог приходит можно увидеть на странице Timelion
+
+4. Приложения расположены по адресам http://localhost:8081 и http://localhost:8080, при переходе на адрес /log будет выполняться логирование

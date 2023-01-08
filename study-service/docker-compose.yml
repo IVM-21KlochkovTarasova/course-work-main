@@ -1,0 +1,26 @@
+version: '3'
+services:
+      
+  study-service-1:
+    image: study-service
+    ports:
+      - 8080:8080
+    environment:
+      APP_PORT: 8080
+      DB_URL: 10.0.2.15:5432
+      KEYCLOAK_URL: http://10.0.2.15:8082
+      LOGSTASH_URL: 10.0.2.15:12202
+      ORDER_SERVICE_URL: http://10.0.2.15/order-service
+      CONSUL_URL: http://10.0.2.15:8500
+  
+  study-service-2:
+    image: study-service
+    ports:
+      - 8084:8084
+    environment:
+      APP_PORT: 8084
+      DB_URL: 10.0.2.15:5432
+      KEYCLOAK_URL: http://10.0.2.15:8082
+      LOGSTASH_URL: 10.0.2.15:12202
+      ORDER_SERVICE_URL: http://10.0.2.15/order-service
+      CONSUL_URL: http://10.0.2.15:8500

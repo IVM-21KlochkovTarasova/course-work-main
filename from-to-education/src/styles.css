@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~material-icons/iconfont/material-icons.css';
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+
+/*@import "~ag-grid-community/dist/styles/ag-theme-balham.css";*/
+@import '~ag-grid-community/dist/styles/ag-theme-alpine.css';
+html, body {
+  height: 100%;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.final-test {
+  background-color: rgba(76, 175, 80, 0.68) !important;
+}
+
+.btn-green{
+  background:  #146525;
+  color: white
+}

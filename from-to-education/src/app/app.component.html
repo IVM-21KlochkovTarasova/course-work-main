@@ -1,0 +1,35 @@
+<div class="mat-app-background main-page-container">
+  <div class="w-100 h-100 outlet-wrapper">
+    <mat-toolbar class="example-toolbar" style="border-bottom: medium solid  #146525; background-color: #ffffff" >
+      <div>
+      </div>
+      <button mat-button routerLink="/show" style="cursor:pointer;" class="example-app-name icon-ot">
+        HOME
+      </button>
+      <span class="example-spacer"></span>
+      <div id="flex">
+        <ng-template [ngIf]="this.authService.getLoggedUser() == undefined" [ngIfElse]="loggedOut">
+          <button mat-button class="example-margin login" (click)="login()">
+            Вход
+          </button>
+        </ng-template>
+
+        <ng-template #loggedOut>
+          <button class="login" (click)="getLk()" mat-button>{{this.userName}} </button>
+          <button style="padding-right: 0" [routerLink]="'show'" mat-icon-button
+                  class="example-margin login"
+                  (click)="logout()"  title="Выход">
+            <mat-icon>exit_to_app</mat-icon>
+          </button>
+        </ng-template>
+
+      </div>
+    </mat-toolbar>
+    <mat-sidenav-container class="example-container" style="height: 93%">
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>
+

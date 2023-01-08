@@ -1,0 +1,25 @@
+{{range services}} {{$name := .Name}} {{$service := service .Name}}
+upstream {{$name}} {
+  zone upstream-{{$name}} 64k;
+  {{range $service}}server {{.Address}}:{{.Port}} max_fails=3 fail_timeout=60 weight=1;
+  {{else}}server 127.0.0.1:65535; # force a 502{{end}}
+} {{end}}
+
+server {
+   
+    listen 80;
+
+    root /usr/share/nginx/html;
+    try_files $uri $uri/ /index.html;
+    
+    index index.html;
+    
+    {{range services}} {{$name := .Name}}
+    location /{{$name}} {
+    	rewrite /{{$name}}/(.*)  /$1  break;
+        proxy_pass http://{{$name}};
+        proxy_redirect     off;
+        proxy_set_header   Host $host;
+    }
+   {{end}}
+}

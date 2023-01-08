@@ -1,0 +1,37 @@
+<form >
+
+  <mat-error *ngIf="err"> {{errText}}</mat-error>
+  <div [formGroup]="form">
+
+    <div  class="mr-1 container">
+      <mat-form-field class="example-full-width mt-1">
+        <mat-label>Текст вопроса</mat-label>
+        <input matInput formControlName="questionText">
+      </mat-form-field>
+      <mat-form-field class="example-full-width mt-1">
+        <mat-label>Пояснение к правильному ответу</mat-label>
+        <input matInput formControlName="answerInformation">
+      </mat-form-field>
+    </div>
+
+    <ng-container *ngFor="let answer of answerList; let i = index">
+      <div class="d-flex align-items-center w-100 container" [formGroup]="answer">
+        <div class="answer-container example-full-width" *ngIf="answer.value.delete === null">
+          <mat-checkbox style="margin-right: 21px" formControlName="isRight" (click)="check(answer)"></mat-checkbox>
+          <mat-form-field class=" mt-1" style="width: 89%">
+            <mat-label>Ответ</mat-label>
+            <input matInput formControlName="answerText">
+          </mat-form-field>
+          <button mat-icon-button *ngIf="i == (answerList.length - 1)" (click)="addAnswer()"><mat-icon style="color: #146525">add_circle</mat-icon></button>
+          <button mat-icon-button *ngIf="(answerList.length - 1) !== 0" (click)="deleteAnswer(answer)"><mat-icon style="color: #146525">clear</mat-icon></button>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+
+  <div style="text-align: center;">
+    <button mat-button (click)="onNoClick()">Отмена</button>
+    <button mat-button [disabled]="form.invalid || checkParam()" (click)="save()">Сохранить</button>
+  </div>
+</form>

@@ -1,0 +1,52 @@
+<div *ngIf="question !== undefined" class="max-w-xl section lg:border rounded-lg lg:p-6 mx-auto">
+  <div class="animate">
+    <button mat-icon-button (click)="exit()" id="home-icon" title="Завершить тест"><mat-icon>close</mat-icon></button>
+    <div style="margin-top: 5px;">{{counter | formatTime}}
+    </div>
+
+    <div>
+      <p id="number">Вопрос {{question.curr + 1}} из {{question.amount}}</p>
+    </div>
+    <div>
+      <mat-progress-bar class="mt-2" id="progress" mode="determinate" value="{{this.progress}}"></mat-progress-bar>
+      <div id="question" >{{question.question_text}}</div>
+      <div *ngIf="question.question_pic !== null" class="image-cell">
+        <img id="pic" src= "{{path}}/media{{question.question_pic}}">
+      </div>
+    </div>
+
+    <div *ngIf="next">
+      <ng-container *ngFor="let prog of question.answers" >
+        <button mat-stroked-button (click)="onClick(prog)" class="button"
+                [ngClass]="{'blue' : prog.select, 'red': !prog.select}">
+          {{prog.answer_text}}</button>
+      </ng-container>
+    </div>
+
+
+    <div *ngIf="!next">
+      <ng-container *ngFor="let prog of question.answers">
+        <button mat-stroked-button class="button2"
+                [ngClass]="{'true-ans' : prog.is_right, 'false-ans': !prog.is_right}">
+          {{prog.answer_text}}</button>
+      </ng-container>
+    </div>
+
+    <div class="mt-2 mb-2 " style="margin: 13%; width: 80%; height: 60px;" *ngIf="!next" >
+      <p *ngIf="question.answer_information" id="false-info-block" class="mt-2 mb-2"
+         [ngClass]="status ? 'info-block-click' : 'info-block'"(click)="clickEvent()">
+        {{question.answer_information}}</p>
+    </div>
+
+    <div style="margin-right: 10%; margin-left: 10%; " class="mt-3">
+      <button *ngIf="question.curr < question.amount - 1" style="float: right; background: #eaeaf2;"
+              mat-raised-button [disabled]="next" (click)="nextAnswer() ">
+        Следующий вопрос</button>
+      <button *ngIf="question.curr === question.amount -1" routerLink="/education"  style="float: right; background: #eaeaf2;"
+              mat-raised-button [disabled]="next" >
+        На главный экран</button>
+    </div>
+
+  </div>
+
+</div>

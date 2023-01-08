@@ -1,0 +1,26 @@
+<form style="text-align: center;" [formGroup]="form">
+  <ng-template [ngIf]="data.sec == 'section'" [ngIfElse]="course">
+    Редактирование раздела
+  </ng-template>
+  <ng-template #course>
+    Редактирование направления
+  </ng-template>
+  <div >
+    <mat-error *ngIf="err"> {{errText}}</mat-error>
+    <div class="mr-1">
+      <mat-form-field class="example-full-width mt-1">
+        <mat-label>Наименование</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+      <mat-form-field class="example-full-width mt-1">
+        <mat-label>Описание</mat-label>
+        <input matInput formControlName="description">
+      </mat-form-field>
+    </div>
+  </div>
+  <div >
+    <button mat-button (click)="onNoClick()">Отмена</button>
+    <button *ngIf="data.sec == 'section'" mat-button [disabled]="form.invalid" (click)="editSec()" >Сохранить</button>
+    <button *ngIf="data.sec == 'courses'" mat-button [disabled]="form.invalid" (click)="editCourse()" >Сохранить</button>
+  </div>
+</form>

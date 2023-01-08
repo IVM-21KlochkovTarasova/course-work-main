@@ -1,0 +1,52 @@
+#flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.button{
+  width: 80%;
+  margin: 13px;
+  background: #DCE9FF;
+}
+
+.button:hover{
+  background: #c9c9f7;
+  transform:scale(1.1,1.05);
+  -webkit-transform:scale(1.1,1.05);
+  -moz-transform:scale(1.1,1.05);
+}
+
+.panel{
+  width: 80%;
+  margin-left: 10%;
+  margin-bottom: 21px;
+  /*box-shadow: 0 0 10px 0 #063dd7 inset, 0 0 0 0 #063dd7;*/
+}
+.complete{
+  background: #53c78d;
+}
+
+
+
+@media only screen and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2) {
+}
+/*@media (min-width: 781px) and (max-height: 430px) {*/
+/*  #flex {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*  }*/
+/*}*/
+/*@media  (max-width: 781px) and (min-height: 256px) {*/
+/*  #flex {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*  }*/
+/*}*/

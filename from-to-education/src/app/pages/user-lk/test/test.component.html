@@ -1,0 +1,31 @@
+<div *ngIf="question !== undefined" class="max-w-xl section lg:border rounded-lg lg:p-6 mx-auto">
+  <div class="animate">
+    <button mat-icon-button (click)="exit()" id="home-icon" title="Завершить тест"><mat-icon>close</mat-icon></button>
+    <div style="margin-top: 5px;">{{counter | formatTime}}
+    </div>
+
+    <div>
+      <p id="number">Вопрос {{question.curr}} из {{question.amount}}</p>
+    </div>
+    <div>
+      <mat-progress-bar class="mt-2" id="progress" mode="determinate" value="{{this.progress}}"></mat-progress-bar>
+      <div id="question" >{{question.questionText}}</div>
+    </div>
+
+    <ng-container *ngFor="let prog of question.answer">
+      <button mat-stroked-button (click)="onClick(prog)" class="button"
+              [ngClass]="{'blue' : prog.select, 'red': !prog.select}">
+        {{prog.answerText}}</button>
+    </ng-container>
+
+    <div style="margin-right: 10%; margin-left: 10%" class="mt-3">
+      <button  style="float: right; background: #eaeaf2;"
+              mat-raised-button [disabled]="next" (click)="putAnswer() ">
+        <span *ngIf="question.curr < question.amount">Следующий вопрос</span>
+        <span *ngIf="question.curr >= question.amount">Смотреть результат</span>
+      </button>
+    </div>
+
+  </div>
+
+</div>

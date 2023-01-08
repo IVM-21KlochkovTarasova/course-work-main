@@ -1,0 +1,10 @@
+.page-container {
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-right: 10px;
+  text-align: start;
+}
+#container{
+  display: flex;
+  flex-direction: column;
+}

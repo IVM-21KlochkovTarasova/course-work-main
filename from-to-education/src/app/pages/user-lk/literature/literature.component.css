@@ -1,0 +1,27 @@
+.panel{
+  width: 80%;
+  margin-left: 10%;
+  margin-bottom: 21px;
+  text-align: justify;
+}
+
+#exit{
+  position: absolute;
+  left: 18px;
+  top: 18px;
+}
+.info-block{
+  text-align: justify;
+  min-height: 28.8px;
+  max-height: 35.8px;
+  overflow: hidden;
+  order: 0;
+  cursor: pointer;
+}
+.info-block-click{
+  cursor: pointer;
+  text-align: justify;
+  height: auto;
+  overflow: hidden;
+  order: 0;
+}

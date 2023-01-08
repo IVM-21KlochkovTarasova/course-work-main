@@ -1,0 +1,154 @@
+/*--white: #FCFCFC;*/
+/*--gray: #CBCDD3;*/
+/*--dark: #777777;*/
+/*--error: #EF8D9C;*/
+/*--orange: #FFC39E;*/
+/*$success: #B0DB7D;*/
+/*$secondary: #99DBB4;*/
+
+/*@import url('https://fonts.googleapis.com/css?family=Lato:400,700');*/
+
+/*$font: 'Lato', sans-serif;*/
+
+html {
+  display: grid;
+  min-height: 100%;
+}
+
+body {
+  display: grid;
+  overflow: hidden;
+  font-family: 'Lato', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+#container {
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  width: 250px;
+  height: 250px;
+}
+
+h1 {
+  font-size: 0.9em;
+  font-weight: 100;
+  letter-spacing: 3px;
+  padding-top: 5px;
+  color: #FCFCFC;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.alert {
+  font-weight: 700;
+  letter-spacing: 5px;
+}
+
+
+button, .dot {
+  cursor: pointer;
+}
+
+.face2 {
+  position: absolute;
+  width: 44%;
+  height: 44%;
+  background: #FCFCFC;
+  border-radius: 50%;
+  border: 1px solid #777777;
+  top: 21%;
+  left: 37.5%;
+  z-index: 2;
+  animation: roll 3s ease-in-out infinite;
+}
+
+.eye {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #777777;
+  border-radius: 50%;
+  top: 40%;
+  left: 20%;
+}
+
+.right {
+  left: 68%;
+}
+
+.mouth {
+  position:absolute;
+  top: 43%;
+  left: 41%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+}
+
+.sad {
+  top: 49%;
+  border: 2px solid;
+  border-color: #777777 transparent transparent #777777;
+  transform: rotate(45deg);
+}
+
+.shadow {
+  position: absolute;
+  width: 41%;
+  height: 3%;
+  opacity: .5;
+  background: #777777;
+  left: 40%;
+  top: 65%;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.scale {
+  animation: scale 1s ease-in infinite;
+}
+.move {
+  animation: move 3s ease-in-out infinite;
+}
+
+
+@keyframes bounce {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes scale {
+  50% {
+    transform: scale(0.9);
+  }
+}
+
+@keyframes roll {
+  0% {
+    transform: rotate(0deg);
+    left: 15%;
+  }
+  50% {
+    left: 55%;
+    transform: rotate(168deg);
+  }
+  100% {
+    transform: rotate(0deg);
+    left: 15%;
+  }
+}
+
+@keyframes move {
+  0% {
+    left: 15%;
+  }
+  50% {
+    left: 55%;
+  }
+  100% {
+    left: 15%;
+  }
+}

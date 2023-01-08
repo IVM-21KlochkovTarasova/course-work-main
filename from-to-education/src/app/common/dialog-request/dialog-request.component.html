@@ -1,0 +1,43 @@
+<form style="text-align: center;" [formGroup]="form">
+  <div style="font-weight: bold" class="mb-2">Отправить заявку на обучение</div>
+  <div >
+    <div id="container">
+      <mat-form-field class="example-full-width">
+        <mat-label>ФИО </mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+      <mat-form-field class="example-full-width mt-1">
+        <mat-label>Название организации</mat-label>
+        <input matInput formControlName="organization">
+      </mat-form-field>
+      <mat-form-field class="example-full-width mt-1">
+        <mat-label>Телефон</mat-label>
+        <input appPhone matInput formControlName="phone">
+      </mat-form-field>
+      <mat-form-field class="example-full-width mt-1">
+        <mat-label>Электронная почта</mat-label>
+        <input type="email" matInput formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width mt-1">
+        <mat-label>Комментарий</mat-label>
+        <textarea matInput formControlName="request_text"></textarea>
+      </mat-form-field>
+
+      <div id="file">
+        <div style="margin-bottom: 5px">
+          <input #csvInput hidden="true" type="file" onclick="this.value=null" (change)="csvInputChange($event)"/>
+          <button mat-flat-button style="background:  #146525; color: white" (click)="csvInput.click()">Добавить файл <mat-icon>file_download</mat-icon></button>
+        </div>
+        <div *ngIf="selectedFile !== undefined" style="margin-left: 5px">
+          {{selectedFile.name}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div>
+    <button color="primary" mat-flat-button [disabled]="form.invalid" (click)="request()" >Отправить заявку</button>
+  </div>
+</form>
+

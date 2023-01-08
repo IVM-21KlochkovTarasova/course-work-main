@@ -1,0 +1,30 @@
+version: '3'
+services:
+
+  prof-nginx:
+    image: prof-front
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+      - ./nginx/templates:/etc/consul-templates
+
+  prof-postgresql:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    volumes:
+      - prof-db:/var/lib/postgresql/data
+      - ./db/init:/docker-entrypoint-initdb.d/
+    environment:
+      - 'POSTGRES_PASSWORD=0a2161bdfe690b902303e1ab4730fe28'
+  
+  consul:
+    image: consul:1.14
+    ports:
+      - 8500:8500
+      - 8501:8501
+          
+volumes:
+  prof-db:

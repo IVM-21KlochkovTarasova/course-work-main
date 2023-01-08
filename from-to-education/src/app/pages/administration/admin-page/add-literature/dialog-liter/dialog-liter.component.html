@@ -1,0 +1,30 @@
+<form >
+  <div style="text-align: center;">
+    Добавление литературы
+  </div>
+
+  <mat-error *ngIf="err"> {{errText}}</mat-error>
+  <div [formGroup]="form">
+
+    <div  class="mr-1 container">
+      <mat-form-field class="example-full-width mt-1">
+        <mat-label>Заголовок</mat-label>
+        <input matInput formControlName="title">
+      </mat-form-field>
+      <mat-form-field class="example-full-width mt-1">
+        <mat-label>Описание</mat-label>
+        <textarea matInput formControlName="description"> </textarea>
+      </mat-form-field>
+      <mat-form-field class="example-full-width mt-1">
+        <mat-label>Ссылка</mat-label>
+        <input matInput formControlName="link">
+      </mat-form-field>
+    </div>
+
+  </div>
+
+  <div style="text-align: center;">
+    <button mat-button (click)="onNoClick()">Отмена</button>
+    <button mat-button [disabled]="form.invalid" (click)="addLiter()" >Сохранить </button>
+  </div>
+</form>

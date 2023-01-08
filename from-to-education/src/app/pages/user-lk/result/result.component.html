@@ -1,0 +1,35 @@
+<div >
+  <div class="mb-3 mt-3">
+    <h2 *ngIf="!result.test.isSuccessful">Тест провален</h2>
+    <h2 *ngIf="result.test.isSuccessful">Тест пройден</h2>
+  </div>
+
+
+  <div class="answer " *ngFor="let ans of result.answers">
+    <mat-card>
+      <mat-card-title class="title ml-2">
+        {{ans.questionText}}</mat-card-title>
+      <mat-card-content>
+        <div *ngIf="ans.rightAnswerId !== ans.givenAnswerId"  class="mt-2 mb-2">
+          <p id="false-ans" class="mt-2 mb-2 ml-2"> {{ans.givenAnswerText}}</p>
+        </div>
+        <div  class="mt-2 mb-2">
+          <p class="mt-2 mb-2 ml-2" id="true-ans">{{ans.rightAnswerText}}</p>
+        </div>
+        <div class="mt-2 mb-2 "  >
+          <p *ngIf="ans.rightAnswerInfo" id="false-info-block" class="mt-2 mb-2"
+             [ngClass]="status ? 'info-block-click' : 'info-block'"(click)="clickEvent()">
+            {{ans.rightAnswerInfo}}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <br>
+  </div>
+  <div style=" margin-right: 15%; float: right;">
+    <button mat-raised-button [routerLink]="'/education'" style="background: #eaeaf2;" class="button mt-2 mb-3" >
+      В главное меню
+    </button>
+  </div>
+</div>
+
+

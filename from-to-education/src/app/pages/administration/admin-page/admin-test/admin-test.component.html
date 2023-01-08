@@ -1,0 +1,139 @@
+<div style="height: 800px">
+
+  <ul class="breadcrumb">
+    <li [ngClass]="{'active': choice == 'section', 'disable':choice != 'section'}" (click)="loadSection()">
+      <a>Раздел</a>
+    </li>
+    <span class="divider"  *ngIf="choice == 'program' || choice == 'courses' || choice == 'currentProgram'
+  || choice == 'question' || choice == 'liter'">
+      <mat-icon>keyboard_arrow_right</mat-icon></span>
+    <li [ngClass]="{'active': choice == 'courses', 'disable':choice != 'courses'}"
+        *ngIf="choice == 'program' || choice == 'courses' || choice == 'currentProgram' || choice == 'question'
+    || choice == 'liter'"
+        (click)="loadCourses(this.currentSec)">
+      <a>{{this.currentSec.name}}</a>
+    </li>
+<!--    //направления-->
+    <span class="divider" *ngIf="choice == 'program' || choice == 'currentProgram' || choice == 'question'
+  || choice == 'liter'">
+      <mat-icon >keyboard_arrow_right</mat-icon>
+    </span>
+    <li [ngClass]="{'active': choice == 'program', 'disable':choice != 'program'}"
+        *ngIf="choice == 'program'|| choice == 'currentProgram' || choice == 'question' || choice == 'liter'"
+        (click)="loadProgram(this.currentCourse)">
+      <a>{{this.currentCourse.name}}</a></li>
+<!--    //вопросы-->
+    <span class="divider" *ngIf="choice == 'question' ">
+      <mat-icon >keyboard_arrow_right</mat-icon>
+    </span>
+    <li [ngClass]="{'active': choice == 'question', 'disable':choice != 'question'}"
+        *ngIf="choice == 'question'" (click)="clickProgram()">
+      <a> {{currentQuestion.name}} Вопросы</a></li>
+
+    <!--    //литература-->
+    <span class="divider" *ngIf="choice == 'liter' ">
+      <mat-icon >keyboard_arrow_right</mat-icon>
+    </span>
+    <li [ngClass]="{'active': choice == 'liter', 'disable':choice != 'liter'}"
+        *ngIf="choice == 'liter'" (click)="clickProgram()">
+      <a> {{currentLit.name}} Литература</a></li>
+  </ul>
+
+  <div class="container" *ngIf="choice == 'section'">
+    <button mat-raised-button class=" mr-2 mt-2 btn-green" *ngIf="permission"
+            (click)="addNewSec('section')">
+      Добавить новый раздел
+    </button>
+  </div>
+
+  <div class="container" *ngIf="choice == 'courses'">
+    <button mat-raised-button  class="btn-green mr-2 mt-2" *ngIf="permission" (click)="addNewSec('courses')">
+      Добавить новое направление
+    </button>
+  </div>
+
+  <div class="container" *ngIf="choice == 'program'">
+    <button mat-raised-button class="btn-green mr-2 mt-2" *ngIf="permission" (click)="addProgram()">
+      Добавить новую программу
+    </button>
+  </div>
+
+  <!--Разделы-->
+  <div  *ngIf="choice == 'section'">
+    <div class="flex" >
+      <mat-card class="item"  *ngFor="let item of program ">
+        <div class="title">{{item.name}}</div>
+        <div class="about">
+          <div>{{item.description}} </div>
+        </div>
+        <div class="containerbtn" >
+          <button mat-raised-button class="green-btn-card" *ngIf="permission" (click)="editSec(item, 'section')">
+            Редактировать
+          </button>
+          <button mat-raised-button class="green-btn-card" (click)="loadCourses(item)">
+            Подробнее
+          </button>
+          <button mat-raised-button style="background:  #f44336; color: white; margin:0 10px" *ngIf="permission" (click)="deleteSec(item)">
+            Удалить
+          </button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+
+  <!--Направления-->
+  <div class="flex" *ngIf="choice == 'courses'">
+    <mat-card class="item"  *ngFor="let item of program ">
+      <div class="title">{{item.name}}</div>
+      <div class="about">
+        <div>{{item.description}} </div>
+      </div>
+      <div class="containerbtn">
+        <button mat-raised-button class="green-btn-card" *ngIf="permission" (click)="editSec(item, 'courses')">
+          Редактировать
+        </button>
+        <button mat-raised-button class="green-btn-card" (click)="loadProgram(item)">
+          Подробнее
+        </button>
+        <button mat-raised-button style="background:  #f44336; color: white; margin:0 10px" *ngIf="permission" (click)="deleteCourses(item)">
+          Удалить
+        </button>
+
+      </div>
+    </mat-card>
+  </div>
+
+  <!--Программа обучения-->
+  <div class="flex" *ngIf="choice == 'program'">
+    <mat-card class="item"  *ngFor="let item of program ">
+      <div class="title">{{item.name}}</div>
+      <div class="about">
+        <div>{{item.description}} </div>
+      </div>
+      <div class="containerbtn">
+        <button mat-raised-button class="green-btn-card" (click)="editProgram(item)">
+          Редактировать
+        </button>
+        <button mat-raised-button class="green-btn-card" (click)="question(item)">
+          Вопросы
+        </button>
+        <button mat-raised-button class="green-btn-card" (click)="literature(item)">
+          Литература
+        </button>
+        <button mat-raised-button style="background:  #f44336; color: white; margin:0 10px" *ngIf="permission" (click)="deleteProgram(item)">
+          Удалить
+        </button>
+      </div>
+    </mat-card>
+  </div>
+
+<!--  литература-->
+  <div *ngIf="choice == 'question'">
+    <app-question [idProgram] = "currentQuestion.id"></app-question>
+  </div>
+
+  <div *ngIf="choice == 'liter'">
+    <app-add-literature [idProgram] = "currentLit.id"></app-add-literature>
+  </div>
+</div>
+

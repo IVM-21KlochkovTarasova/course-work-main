@@ -1,0 +1,41 @@
+<form style="text-align: center;" [formGroup]="form">
+    Добавление новой программы
+  <mat-error *ngIf="err"> {{errText}}</mat-error>
+  <div [formGroup]="form" class="mr-1" id="container">
+    <mat-form-field class="example-full-width mt-1">
+      <mat-label>Наименование</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field class="example-full-width mt-1">
+      <mat-label>Описание</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+    <mat-form-field class="example-full-width mt-1">
+      <mat-label>Минимальное время подготовки, час.</mat-label>
+      <input matInput type="number" pattern="[0-9]+" formControlName="minimalDuration">
+    </mat-form-field>
+    <mat-form-field class="example-full-width mt-1">
+      <mat-label>Максимальное время выполнения теста, мин.</mat-label>
+      <input matInput type="number" pattern="[0-9]+" formControlName="completeTime">
+    </mat-form-field>
+    <mat-form-field class="example-full-width mt-1">
+      <mat-label>Количество вопросов в тесте</mat-label>
+      <input matInput type="number" pattern="[0-9]+" formControlName="questionNums">
+    </mat-form-field>
+    <mat-form-field class="example-full-width mt-1">
+      <mat-label>Количество попыток итогового теста</mat-label>
+      <input matInput type="number" pattern="[0-9]+" formControlName="triesCount">
+    </mat-form-field>
+    <mat-form-field class="example-full-width mt-1">
+      <mat-label>Стоимость</mat-label>
+      <input matInput type="number" pattern="[0-9]+" formControlName="price">
+    </mat-form-field>
+  </div>
+
+  <div >
+    <button mat-button (click)="onNoClick()">Отмена</button>
+    <button mat-button [disabled]="form.invalid" (click)="addProgram()" >Добавить</button>
+  </div>
+
+
+</form>
